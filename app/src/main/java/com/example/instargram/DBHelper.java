@@ -14,9 +14,9 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String createSQL= "CREATE TABLE IF NOT EXISTS CONTACT_T (" +
-                "NAME "         + "TEXT," +
-                "ID "        + "TEXT," +
-                "PW "       + "TEXT" + ")" ;
+                "NAME "         + "TEXT not null," +
+                "ID "        + "TEXT not null," +
+                "PW "       + "TEXT not null" + ")" ;
         db.execSQL(createSQL);
 
         db.execSQL("insert into  CONTACT_T values('홍성우','painter3400','1234')");

@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -65,9 +66,14 @@ public class RegistActivity extends AppCompatActivity {
 
         new DAO().insert(getApplicationContext(),vo);
 
-
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-
+        if (name == null || name.isEmpty() || id == null || id.isEmpty() || pw == null || pw.isEmpty()){
+            Toast toast = Toast.makeText(RegistActivity.this, "값을 입력하세요", Toast.LENGTH_SHORT);
+            toast.show();
+        }else{
+            Toast toast = Toast.makeText(RegistActivity.this, "회원가입 완료", Toast.LENGTH_SHORT);
+            toast.show();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
     }
 }
