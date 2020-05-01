@@ -29,10 +29,18 @@
                 android:text="등록" />
         </LinearLayout>
 
+        <EditText
+            android:id="@+id/txtWrite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="텍스트 입력"
+            android:inputType="textPersonName" />
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="match_parent"
-            android:layout_height="477dp"
+            android:layout_height="314dp"
             app:srcCompat="@drawable/ic_launcher_foreground" />
     </LinearLayout>
 </LinearLayout>

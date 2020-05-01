@@ -15,14 +15,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         String createSQL= "CREATE TABLE IF NOT EXISTS CONTACT_T (" +
                 "NAME "         + "TEXT not null," +
-                "ID "        + "TEXT not null," +
-                "PW "       + "TEXT not null" + ")" ;
+                "ID "        + "TEXT not null unique," +
+                "PW "       + "TEXT not null)";
         db.execSQL(createSQL);
 
         db.execSQL("insert into  CONTACT_T values('홍성우','painter3400','1234')");
         db.execSQL("insert into  CONTACT_T values('하준원','cupi12','1234')");
         db.execSQL("insert into  CONTACT_T values('윤재언','yoonjaeeon','1234')");
-        db.execSQL("insert into  CONTACT_T values('윤재언','yoonjaeeon','1234')");
+
     }
 
     @Override

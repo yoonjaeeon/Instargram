@@ -16,6 +16,9 @@ public class DAO {
                 "'" + vo.getId() + "'," +
                 "'" + vo.getPw() + "')" ;
 
+//        "select id from CONTACT_T  WHERE id = '" + vo.getId()
+//        String sql = "select id from CONTACT_T  WHERE id = '" + vo.getId() + "'";
+//        if(vo.getId().equals(sql))
         db.execSQL(sqlInsert);
         dbHelper.close();
     }
@@ -33,5 +36,22 @@ public class DAO {
         }else{
             return false;
         }
-    }
-}
+    }//end of loginCheck
+
+    public boolean idCheck(Context context, VO vo){
+
+        RegistActivity registActivity = new RegistActivity();
+
+        DBHelper dbhelper = new DBHelper(context);
+        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        String sql = "select id from CONTACT_T  WHERE id = '" + vo.getId()+"'" ;
+
+        Cursor cursor=db.rawQuery(sql, null);
+        if (cursor.moveToNext()){ //cursor == resultset
+            return true;
+        }else{
+            return false;
+        }
+    }//end of idCheck
+
+}//end of class
