@@ -24,8 +24,37 @@ public class ContentActivity extends AppCompatActivity implements AutoPermission
     Button btnPhoto;
     Button btnSub;
     EditText txtWrite;
-    ImageView photoView;
     ImageView imageView2;
+    Bitmap bitmap;
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        imageView2 = findViewById(R.id.imageView2);
+        if (requestCode == 101 && resultCode == RESULT_OK) {
+            txtWrite = findViewById(R.id.txtWrite);
+            Uri fileUri= data.getData();
+            String sFileUri = fileUri.toString();
+            DAO dao = new DAO();
+            VO vo = new VO();
+            String sTxtWrite = txtWrite.getText().toString();
+            vo.setContent(sTxtWrite);
+            vo.setUri(sFileUri);
+//            new DAO().insertContent(getApplicationContext(),vo);
+            ContentResolver resolver = getContentResolver();
+            try{
+                InputStream instream = resolver.openInputStream(fileUri); //이미지 오픈
+                Bitmap imageBitmap = BitmapFactory.decodeStream(instream); //비트맵으로 전환
+                imageView2.setImageBitmap(imageBitmap); //이미지 뷰에 넣음
+                instream.close();
+                bitmap = imageBitmap;
+
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }//end of onActivityResult
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,39 +68,23 @@ public class ContentActivity extends AppCompatActivity implements AutoPermission
         btnPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            openGallery();
+                openGallery();
             }
         });//end of btnPhoto
 
         btnSub.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ViewActivity viewActivity = new ViewActivity();
-
                 imageView2 = findViewById(R.id.imageView2);
-                txtWrite = findViewById(R.id.txtWrite);
-
-                viewActivity.setTextView(txtWrite);
-                viewActivity.setPhotoView(imageView2);
+                String sTxtWrite = txtWrite.getText().toString() ;
 
                 Toast toast = Toast.makeText(ContentActivity.this, "게시글 작성 완료", Toast.LENGTH_SHORT);
                 toast.show();
 
-//                BitmapDrawable d = (BitmapDrawable)(ImageView)view.findViewById(R.id.imageView2)).getDrawable();
-//                Bitmap b = d.getBitmap();
-
-//                imageView2.setImageBitmap(b);
-//
-//                Intent intent = new Intent();
-//                intent.putExtra("bm", (Bitmap)b);
-
-
-
-
-                Intent intent = new Intent(getApplicationContext(), ViewActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewActivity2.class);
+                intent.putExtra("$text",sTxtWrite); /*송신*/
+                intent.putExtra("image", bitmap);
                 startActivity(intent);
-
             }
         });//end of btnSub
         AutoPermissions.Companion.loadAllPermissions(this,101); //permission 권한을 물어보는 창을 띄움
@@ -84,26 +97,6 @@ public class ContentActivity extends AppCompatActivity implements AutoPermission
         intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, 101); //ForResult = 결과값을 가져옴
     }//end of openGallery
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        imageView2 = findViewById(R.id.imageView2);
-        if (requestCode == 101 && resultCode == RESULT_OK) {
-            Uri fileUri= data.getData();
-            ContentResolver resolver = getContentResolver();
-            try{
-                InputStream instream = resolver.openInputStream(fileUri); //이미지 오픈
-                Bitmap imageBitmap = BitmapFactory.decodeStream(instream); //비트맵으로 전환
-                imageView2.setImageBitmap(imageBitmap); //이미지 뷰에 넣음
-                instream.close();
-            } catch(Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }//end of onActivityResult
-
-
 
     @Override
     public void onDenied(int i, String[] strings) {

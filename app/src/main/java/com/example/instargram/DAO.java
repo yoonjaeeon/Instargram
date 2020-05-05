@@ -23,6 +23,55 @@ public class DAO {
         dbHelper.close();
     }
 
+
+    public void insertContent(Context context, VO vo){
+        dbHelper = new DBHelper(context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String sqlInsert = "INSERT INTO CONTENT " +
+                "(uri, content) VALUES ('" +
+                vo.getUri() + "'," +
+                "'" + vo.getContent()+ "')" ;
+
+//        "select id from CONTACT_T  WHERE id = '" + vo.getId()
+//        String sql = "select id from CONTACT_T  WHERE id = '" + vo.getId() + "'";
+//        if(vo.getId().equals(sql))
+        db.execSQL(sqlInsert);
+        dbHelper.close();
+    }
+
+
+
+    public Cursor uri(Context context, VO vo){
+
+        RegistActivity registActivity = new RegistActivity();
+
+        DBHelper dbhelper = new DBHelper(context);
+        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        String sql = "select uri from CONTENT" ;
+
+        Cursor cursor=db.rawQuery(sql, null);
+        if (cursor.moveToNext()){ //cursor == resultset
+            return cursor;
+        }else{
+            return cursor;
+        }
+    }
+    public Cursor content(Context context, VO vo){
+
+        RegistActivity registActivity = new RegistActivity();
+
+        DBHelper dbhelper = new DBHelper(context);
+        SQLiteDatabase db=dbhelper.getReadableDatabase();
+        String sql = "select content from CONTENT" ;
+
+        Cursor cursor=db.rawQuery(sql, null);
+        if (cursor.moveToNext()){ //cursor == resultset
+            return cursor;
+        }else{
+            return cursor;
+        }
+    }
+
     public Boolean loginCheck(Context context, VO vo){
 
         DBHelper dbhelper = new DBHelper(context);

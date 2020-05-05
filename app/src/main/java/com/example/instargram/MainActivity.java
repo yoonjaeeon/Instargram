@@ -1,8 +1,5 @@
 package com.example.instargram;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,12 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     Button btnLogin;
@@ -45,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 String id = editId.getText().toString();
 
                 EditText editTPw = (EditText) findViewById(R.id.textPw);
+
                 String pw = editTPw.getText().toString();
                 VO vo = new VO();
 //                vo.set_id(Integer.parseInt());

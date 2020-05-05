@@ -13,6 +13,7 @@
         <activity android:name=".RegistActivity"/>
         <activity android:name=".ContentActivity"/>
         <activity android:name=".ViewActivity"/>
+        <activity android:name=".ViewActivity2"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
