@@ -112,9 +112,7 @@ public class ContentActivity extends AppCompatActivity implements AutoPermission
     }
 
     @Override
-    public void onGranted(int i, String[] strings) {
-
-    }
+    public void onGranted(int i, String[] strings) {}
 
     //권한 승인을 위한 오버라이딩 (gradle에 다운받은것을 사용하기위해)
     @Override
