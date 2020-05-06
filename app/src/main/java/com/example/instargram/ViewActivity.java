@@ -56,18 +56,18 @@ public class ViewActivity extends AppCompatActivity {
 //        이미지뷰 uri 가져와서 bitmap으로 전환하기
         ContentResolver resolver = getContentResolver();
         try{
-            VO vo = new VO();
-            DAO dao  = new DAO();
-            String uri = String.valueOf(new DAO().uri(getApplicationContext(),vo));
-            Uri myUri = Uri.parse(uri);
+//            VO vo = new VO();
+//            DAO dao  = new DAO();
+//            String uri = String.valueOf(new DAO().uri(getApplicationContext(),vo));
+//            Uri myUri = Uri.parse(uri);
+//
+//            String content = String.valueOf(new DAO().content(getApplicationContext(),vo));
 
-            String content = String.valueOf(new DAO().content(getApplicationContext(),vo));
-
-
-            InputStream instream = resolver.openInputStream(myUri); //이미지 오픈
-            Bitmap imageBitmap = BitmapFactory.decodeStream(instream); //비트맵으로 전환
-            photoView.setImageBitmap(imageBitmap); //이미지 뷰에 넣음
-            instream.close();
+//
+//            InputStream instream = resolver.openInputStream(myUri); //이미지 오픈
+//            Bitmap imageBitmap = BitmapFactory.decodeStream(instream); //비트맵으로 전환
+//            photoView.setImageBitmap(imageBitmap); //이미지 뷰에 넣음
+//            instream.close();
         } catch(Exception e) {
             e.printStackTrace();
         }

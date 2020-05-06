@@ -62,7 +62,7 @@ public class DAO {
 
         DBHelper dbhelper = new DBHelper(context);
         SQLiteDatabase db=dbhelper.getReadableDatabase();
-        String sql = "select content from CONTENT" ;
+        String sql = "select content from CONTENT ORDER BY 1" ;
 
         Cursor cursor=db.rawQuery(sql, null);
         if (cursor.moveToNext()){ //cursor == resultset
